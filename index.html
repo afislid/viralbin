@@ -6,7 +6,7 @@
     <meta name="description" content="Get viral content ideas instantly! Perfect for YouTube, TikTok, blogs & more. Free & AI-powered." />
     <meta name="author" content="ViralBin Team" />
     <title>ViralBin - Your Viral Content Idea Generator</title>
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="icon" type="image/png" href="assets/logo.png" />
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -16,20 +16,87 @@
     
     <!-- Core theme CSS (includes Bootstrap) -->
     <link href="css/styles.css" rel="stylesheet" />
+    <script type="module">
+        // Import Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCUH-4WazLiiTsXywi1htP8XVwfw27g1fw",
+            authDomain: "viralbin.firebaseapp.com",
+            projectId: "viralbin",
+            storageBucket: "viralbin.firebasestorage.app",
+            messagingSenderId: "3689527603",
+            appId: "1:3689527603:web:1642f9c7db7e029eee2646"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Sign Up Function
+        window.signUpUser = function () {
+            const email = document.getElementById("signupEmail").value;
+            const password = document.getElementById("signupPassword").value;
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    alert("Sign up successful!");
+                })
+                .catch((error) => {
+                    alert(error.message);
+                });
+        };
+
+        // Login Function
+        window.loginUser = function () {
+            const email = document.getElementById("loginEmail").value;
+            const password = document.getElementById("loginPassword").value;
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    alert("Login successful!");
+                })
+                .catch((error) => {
+                    alert(error.message);
+                });
+        };
+    </script>
+    <style>
+        body {
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+        button:hover, select:hover {
+            transform: scale(1.05);
+            transition: transform 0.2s;
+        }
+    </style>
 </head>
-<body>
+<body class="smooth-scroll">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="#page-top">🔥 ViralBin - AI Content Ideas</a>
+            <a class="navbar-brand fw-bold" href="index.html">
+                <img src="assets/logo.png" alt="ViralBin Logo" width="40" height="40" style="margin-right: 10px;">
+                🔥 ViralBin - AI Content Ideas
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                Menu
                 <i class="bi-list"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="features.html">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signupModal">Sign Up</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+                    <li class="nav-item"><button id="darkModeToggle" class="btn btn-outline-dark">🌙 Dark Mode</button></li>
                 </ul>
             </div>
         </div>
@@ -43,27 +110,27 @@
     <main>
         <section>
             <h2>Generate Your Viral Content Idea</h2>
+            <label for="category">Choose a platform:</label>
+            <select id="category">
+                <option value="youtube">YouTube</option>
+                <option value="tiktok">TikTok</option>
+                <option value="instagram">Instagram</option>
+                <option value="blog">Blog</option>
+            </select>
             <button id="generateButton">Generate Idea</button>
             <p id="ideaOutput"></p>
         </section>
         
-        <!-- Device Mockup with Video -->
-        <section class="device-mockup">
-            <div class="device" data-device="iPhoneX" data-orientation="portrait" data-color="black">
-                <div class="screen bg-black">
-                    <video muted="muted" autoplay loop style="max-width: 100%; height: 100%">
-                        <source src="assets/img/demo-screen.mp4" type="video/mp4" />
-                    </video>
-                </div>
-            </div>
+        <section>
+            <h2>Idea History</h2>
+            <ul id="ideaHistory"></ul>
         </section>
     </main>
     
-    <footer>
-        <p>&copy; 2025 ViralBin. All rights reserved.</p>
+    <footer class="footer mt-auto py-3 bg-light text-center">
+        <div class="container">
+            <p>&copy; 2025 ViralBin. All rights reserved.</p>
+        </div>
     </footer>
-    
-    <!-- JavaScript -->
-    <script src="js/script.js"></script>
 </body>
 </html>
