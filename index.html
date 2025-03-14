@@ -34,65 +34,120 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+
+        // Sign Up Function
+        window.signUpUser = function () {
+            const email = document.getElementById("signupEmail").value;
+            const password = document.getElementById("signupPassword").value;
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    alert("Sign up successful!");
+                })
+                .catch((error) => {
+                    alert(error.message);
+                });
+        };
+
+        // Login Function
+        window.loginUser = function () {
+            const email = document.getElementById("loginEmail").value;
+            const password = document.getElementById("loginPassword").value;
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    alert("Login successful!");
+                })
+                .catch((error) => {
+                    alert(error.message);
+                });
+        };
     </script>
     <style>
         body {
             transition: background-color 0.3s, color 0.3s;
-            background-color: #1E2A38;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
             color: white;
             text-align: center;
+            font-family: 'Mulish', sans-serif;
         }
-        .hero {
-            padding: 100px 20px;
-            background: linear-gradient(120deg, #007bff, #6610f2);
+        .dark-mode {
+            background-color: #121212;
             color: white;
-            font-size: 24px;
-            font-weight: bold;
-            border-radius: 10px;
         }
-        .hero button {
-            margin-top: 20px;
-            background-color: #ffcc00;
-            color: black;
-            padding: 10px 20px;
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+        button:hover, select:hover {
+            transform: scale(1.05);
+            transition: transform 0.2s;
+        }
+        .hero-section {
+            padding: 50px;
+        }
+        .cta-button {
+            background-color: #ff5722;
+            color: white;
+            padding: 15px 30px;
             font-size: 18px;
             border: none;
-            cursor: pointer;
             border-radius: 5px;
-            transition: 0.3s;
+            cursor: pointer;
+            text-decoration: none;
         }
-        .hero button:hover {
-            background-color: #ff9900;
+        .cta-button:hover {
+            background-color: #e64a19;
+        }
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .feature-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            width: 250px;
         }
     </style>
 </head>
-<body>
+<body class="smooth-scroll">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.html">
                 <img src="assets/logo.png" alt="ViralBin Logo" width="40" height="40" style="margin-right: 10px;">
                 🔥 ViralBin - AI Content Ideas
             </a>
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="features.html">Features</a></li>
-                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                <li class="nav-item"><a class="nav-link" href="signup.html">Sign Up</a></li>
-                <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-            </ul>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="bi-list"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="signup.html">Sign Up</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
     
-    <header class="hero">
+    <header class="hero-section">
         <h1>Welcome to ViralBin</h1>
         <p>Your ultimate viral content idea generator!</p>
-        <button onclick="window.location.href='signup.html'">Get Started</button>
+        <a href="signup.html" class="cta-button">Get Started</a>
     </header>
     
-    <footer class="footer mt-auto py-3 bg-dark text-center">
-        <div class="container">
-            <p>&copy; 2025 ViralBin. All rights reserved.</p>
+    <div class="features">
+        <div class="feature-box">
+            <h3>📢 AI-Powered Ideas</h3>
+            <p>Get unique and viral content suggestions instantly!</p>
         </div>
-    </footer>
+        <div class="feature-box">
+            <h3>📱 Multiple Platforms</h3>
+            <p>Generate content ideas for YouTube, TikTok, Instagram & more.</p>
+        </div>
+        <div class="feature-box">
+            <h3>🚀 Boost Your Reach</h3>
+            <p>Skyrocket your social media presence with trending ideas.</p>
+        </div>
+    </div>
 </body>
 </html>
