@@ -27,44 +27,29 @@
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
-        let isSignup = true; // Declare globally
+        let isSignup = true; // Default state is signup
 
+        document.addEventListener("DOMContentLoaded", () => {
+            // Email/Password Signup/Login
+            document.getElementById("auth-button").addEventListener("click", () => {
+                const email = document.getElementById("email").value;
+                const password = document.getElementById("password").value;
 
-       document.addEventListener("DOMContentLoaded", () => {
-    // Email/Password Signup/Login
-    document.getElementById("auth-button").addEventListener("click", () => {
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("password").value;
-
-        if (isSignup) {
-            createUserWithEmailAndPassword(auth, email, password)
-                .then(userCredential => {
-                    alert("Account created successfully!");
-                    window.location.href = "dashboard.html"; // Redirect to dashboard after signup
-                })
-                .catch(error => alert(error.message));
-        } else {
-            signInWithEmailAndPassword(auth, email, password)
-                .then(userCredential => {
-                    alert("Logged in successfully!");
-                    window.location.href = "dashboard.html"; // Redirect to dashboard after login
-                })
-                .catch(error => alert(error.message));
-        }
-    });
-
-    // Fix Toggle Signup/Login Link
-    document.getElementById("toggle-link").addEventListener("click", () => {
-        isSignup = !isSignup;
-        document.getElementById("form-title").textContent = isSignup ? "Sign Up" : "Login";
-        document.getElementById("auth-button").textContent = isSignup ? "Sign Up" : "Login";
-        document.getElementById("toggle-link").textContent = isSignup 
-            ? "Already have an account? Login here" 
-            : "Don't have an account? Sign up here";
-          });
-       });
-
-              }
+                if (isSignup) {
+                    createUserWithEmailAndPassword(auth, email, password)
+                        .then(userCredential => {
+                            alert("Account created successfully!");
+                            window.location.href = "dashboard.html"; // Redirect after signup
+                        })
+                        .catch(error => alert(error.message));
+                } else {
+                    signInWithEmailAndPassword(auth, email, password)
+                        .then(userCredential => {
+                            alert("Logged in successfully!");
+                            window.location.href = "dashboard.html"; // Redirect after login
+                        })
+                        .catch(error => alert(error.message));
+                }
             });
 
             // Google Sign-In
@@ -75,6 +60,14 @@
                         window.location.href = "dashboard.html"; // Redirects to new landing page
                     })
                     .catch(error => alert(error.message));
+            });
+
+            // Toggle Login/Signup
+            document.getElementById("toggle-link").addEventListener("click", () => {
+                isSignup = !isSignup;
+                document.getElementById("form-title").textContent = isSignup ? "Sign Up" : "Login";
+                document.getElementById("auth-button").textContent = isSignup ? "Sign Up" : "Login";
+                document.getElementById("toggle-link").textContent = isSignup ? "Already have an account? Login here" : "Don't have an account? Sign up here";
             });
         });
     </script>
@@ -154,30 +147,11 @@
         
         <!-- Google Sign-In Button -->
         <button class="google-btn" id="google-signin">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" alt="Google Logo" width="20">
+            <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Logo" width="20">
             Sign in with Google
         </button>
 
         <p class="toggle" id="toggle-link">Already have an account? Login here</p>
     </div>
-
-    <script>
-        const formTitle = document.getElementById("form-title");
-        const authButton = document.getElementById("auth-button");
-        const toggleLink = document.getElementById("toggle-link");
-
-        toggleLink.addEventListener("click", () => {
-            isSignup = !isSignup;
-            if (isSignup) {
-                formTitle.textContent = "Sign Up";
-                authButton.textContent = "Sign Up";
-                toggleLink.textContent = "Already have an account? Login here";
-            } else {
-                formTitle.textContent = "Login";
-                authButton.textContent = "Login";
-                toggleLink.textContent = "Don't have an account? Sign up here";
-            }
-        });
-    </script>
 </body>
 </html>
