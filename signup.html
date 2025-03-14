@@ -6,6 +6,7 @@
     <title>Signup & Login - ViralBin</title>
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
     <script type="module">
         // Import Firebase
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -26,6 +27,8 @@
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
+        let isSignup = true; // Ensure isSignup is declared
+
         // Email/Password Signup/Login
         document.getElementById("auth-button").addEventListener("click", () => {
             const email = document.getElementById("email").value;
@@ -35,12 +38,14 @@
                 createUserWithEmailAndPassword(auth, email, password)
                     .then(userCredential => {
                         alert("Account created successfully!");
+                        window.location.href = "index.html"; // Redirect after signup
                     })
                     .catch(error => alert(error.message));
             } else {
                 signInWithEmailAndPassword(auth, email, password)
                     .then(userCredential => {
                         alert("Logged in successfully!");
+                        window.location.href = "index.html"; // Redirect after login
                     })
                     .catch(error => alert(error.message));
             }
@@ -129,10 +134,13 @@
         <input type="email" id="email" placeholder="Enter your email">
         <input type="password" id="password" placeholder="Enter your password">
         <button class="btn" id="auth-button">Sign Up</button>
+        
+        <!-- Google Sign-In Button -->
         <button class="google-btn" id="google-signin">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" alt="Google Logo">
             Sign in with Google
         </button>
+
         <p class="toggle" id="toggle-link">Already have an account? Login here</p>
     </div>
 
@@ -141,7 +149,6 @@
         const formTitle = document.getElementById("form-title");
         const authButton = document.getElementById("auth-button");
         const toggleLink = document.getElementById("toggle-link");
-        let isSignup = true;
 
         toggleLink.addEventListener("click", () => {
             isSignup = !isSignup;
