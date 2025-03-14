@@ -63,6 +63,8 @@
     </script>
     <style>
         body {
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            color: white;
             transition: background-color 0.3s, color 0.3s;
         }
         .dark-mode {
@@ -93,10 +95,10 @@
                     <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="features.html">Features</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signupModal">Sign Up</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="signup.html">Sign Up</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
                     <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
-                    <li class="nav-item"><button id="darkModeToggle" class="btn btn-outline-dark">🌙 Dark Mode</button></li>
+                    <li class="nav-item"><button id="darkModeToggle" class="btn btn-outline-light">🌙 Dark Mode</button></li>
                 </ul>
             </div>
         </div>
@@ -105,29 +107,10 @@
     <header>
         <h1>Welcome to ViralBin</h1>
         <p>Your ultimate viral content idea generator!</p>
+        <a href="signup.html" class="btn btn-primary">Get Started</a>
     </header>
     
-    <main>
-        <section>
-            <h2>Generate Your Viral Content Idea</h2>
-            <label for="category">Choose a platform:</label>
-            <select id="category">
-                <option value="youtube">YouTube</option>
-                <option value="tiktok">TikTok</option>
-                <option value="instagram">Instagram</option>
-                <option value="blog">Blog</option>
-            </select>
-            <button id="generateButton">Generate Idea</button>
-            <p id="ideaOutput"></p>
-        </section>
-        
-        <section>
-            <h2>Idea History</h2>
-            <ul id="ideaHistory"></ul>
-        </section>
-    </main>
-    
-    <footer class="footer mt-auto py-3 bg-light text-center">
+    <footer class="footer mt-auto py-3 bg-dark text-center text-white">
         <div class="container">
             <p>&copy; 2025 ViralBin. All rights reserved.</p>
         </div>
