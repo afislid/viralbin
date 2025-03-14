@@ -27,29 +27,44 @@
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
-        let isSignup = true; // Ensure isSignup is declared
+        let isSignup = true; // Declare globally
 
-        document.addEventListener("DOMContentLoaded", () => {
-            // Email/Password Signup/Login
-            document.getElementById("auth-button").addEventListener("click", () => {
-                const email = document.getElementById("email").value;
-                const password = document.getElementById("password").value;
 
-                if (isSignup) {
-                    createUserWithEmailAndPassword(auth, email, password)
-                        .then(userCredential => {
-                            alert("Account created successfully!");
-                            window.location.href = "dashboard.html"; // Redirect after signup
-                        })
-                        .catch(error => alert(error.message));
-                } else {
-                    signInWithEmailAndPassword(auth, email, password)
-                        .then(userCredential => {
-                            alert("Logged in successfully!");
-                            window.location.href = "dashboard.html"; // Redirect after login
-                        })
-                        .catch(error => alert(error.message));
-                }
+       document.addEventListener("DOMContentLoaded", () => {
+    // Email/Password Signup/Login
+    document.getElementById("auth-button").addEventListener("click", () => {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        if (isSignup) {
+            createUserWithEmailAndPassword(auth, email, password)
+                .then(userCredential => {
+                    alert("Account created successfully!");
+                    window.location.href = "dashboard.html"; // Redirect to dashboard after signup
+                })
+                .catch(error => alert(error.message));
+        } else {
+            signInWithEmailAndPassword(auth, email, password)
+                .then(userCredential => {
+                    alert("Logged in successfully!");
+                    window.location.href = "dashboard.html"; // Redirect to dashboard after login
+                })
+                .catch(error => alert(error.message));
+        }
+    });
+
+    // Fix Toggle Signup/Login Link
+    document.getElementById("toggle-link").addEventListener("click", () => {
+        isSignup = !isSignup;
+        document.getElementById("form-title").textContent = isSignup ? "Sign Up" : "Login";
+        document.getElementById("auth-button").textContent = isSignup ? "Sign Up" : "Login";
+        document.getElementById("toggle-link").textContent = isSignup 
+            ? "Already have an account? Login here" 
+            : "Don't have an account? Sign up here";
+          });
+       });
+
+              }
             });
 
             // Google Sign-In
@@ -139,7 +154,7 @@
         
         <!-- Google Sign-In Button -->
         <button class="google-btn" id="google-signin">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" alt="Google Logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" alt="Google Logo" width="20">
             Sign in with Google
         </button>
 
