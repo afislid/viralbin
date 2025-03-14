@@ -51,14 +51,16 @@
             }
         });
 
-        // Google Sign-In
-        document.getElementById("google-signin").addEventListener("click", () => {
-            signInWithPopup(auth, provider)
-                .then(result => {
+        //// Google Sign-In
+           document.getElementById("google-signin").addEventListener("click", () => {
+               signInWithPopup(auth, provider)
+                  .then(result => {
                     alert("Signed in as: " + result.user.displayName);
-                    window.location.href = "index.html"; // Redirect after login
-                })
-                .catch(error => alert(error.message));
+                    window.location.href = "dashboard.html"; // Redirects to new landing page
+        })
+        .catch(error => alert(error.message));
+});
+;
         });
     </script>
 
@@ -137,8 +139,10 @@
         
         <!-- Google Sign-In Button -->
         <button class="google-btn" id="google-signin">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" alt="Google Logo">
-            Sign in with Google
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google Logo">
+         Sign in with Google
+    </button>
+
         </button>
 
         <p class="toggle" id="toggle-link">Already have an account? Login here</p>
