@@ -34,83 +34,62 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-
-        // Sign Up Function
-        window.signUpUser = function () {
-            const email = document.getElementById("signupEmail").value;
-            const password = document.getElementById("signupPassword").value;
-            createUserWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    alert("Sign up successful!");
-                })
-                .catch((error) => {
-                    alert(error.message);
-                });
-        };
-
-        // Login Function
-        window.loginUser = function () {
-            const email = document.getElementById("loginEmail").value;
-            const password = document.getElementById("loginPassword").value;
-            signInWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    alert("Login successful!");
-                })
-                .catch((error) => {
-                    alert(error.message);
-                });
-        };
     </script>
     <style>
         body {
-            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-            color: white;
             transition: background-color 0.3s, color 0.3s;
-        }
-        .dark-mode {
-            background-color: #121212;
+            background-color: #1E2A38;
             color: white;
+            text-align: center;
         }
-        .smooth-scroll {
-            scroll-behavior: smooth;
+        .hero {
+            padding: 100px 20px;
+            background: linear-gradient(120deg, #007bff, #6610f2);
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 10px;
         }
-        button:hover, select:hover {
-            transform: scale(1.05);
-            transition: transform 0.2s;
+        .hero button {
+            margin-top: 20px;
+            background-color: #ffcc00;
+            color: black;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .hero button:hover {
+            background-color: #ff9900;
         }
     </style>
 </head>
-<body class="smooth-scroll">
+<body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.html">
                 <img src="assets/logo.png" alt="ViralBin Logo" width="40" height="40" style="margin-right: 10px;">
                 🔥 ViralBin - AI Content Ideas
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="bi-list"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="features.html">Features</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link" href="signup.html">Sign Up</a></li>
-                    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
-                    <li class="nav-item"><button id="darkModeToggle" class="btn btn-outline-light">🌙 Dark Mode</button></li>
-                </ul>
-            </div>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="features.html">Features</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="signup.html">Sign Up</a></li>
+                <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+            </ul>
         </div>
     </nav>
     
-    <header>
+    <header class="hero">
         <h1>Welcome to ViralBin</h1>
         <p>Your ultimate viral content idea generator!</p>
-        <a href="signup.html" class="btn btn-primary">Get Started</a>
+        <button onclick="window.location.href='signup.html'">Get Started</button>
     </header>
     
-    <footer class="footer mt-auto py-3 bg-dark text-center text-white">
+    <footer class="footer mt-auto py-3 bg-dark text-center">
         <div class="container">
             <p>&copy; 2025 ViralBin. All rights reserved.</p>
         </div>
