@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -437,3 +438,450 @@
     </script>
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - ViralBin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <style>
+        body {
+            background: #ffffff; /* White background */
+            color: #000000; /* Black text */
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: #ffffff; /* White background */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+        .user-profile {
+            display: flex;
+            align-items: center;
+        }
+        .user-profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .logout {
+            color: #000000; /* Black text */
+            text-decoration: none;
+            font-size: 16px;
+            margin-left: 20px;
+            cursor: pointer;
+        }
+        .logout:hover {
+            text-decoration: underline;
+        }
+        .platforms {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .platforms select {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc; /* Light gray border */
+            cursor: pointer;
+            background: #ffffff; /* White background */
+            color: #000000; /* Black text */
+            font-weight: bold; /* Bold text */
+            transition: background 0.3s, transform 0.3s;
+        }
+        .platforms select:hover {
+            background: #f0f0f0; /* Light gray on hover */
+            transform: translateY(-2px); /* Slight lift effect */
+        }
+        .platforms select:focus {
+            outline: none;
+            background: #f0f0f0; /* Light gray when focused */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+        .output-box {
+            background: #f0f0f0; /* Light gray background */
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 600px;
+            min-height: 100px;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #000000; /* Black text */
+        }
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+        button {
+            background: #ff6f61; /* Orange background */
+            color: white; /* White text */
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 16px;
+            font-weight: bold; /* Bold text */
+            margin: 5px; /* Add spacing between buttons */
+        }
+        button:hover {
+            background: #ff3b2f; /* Darker orange on hover */
+            transform: translateY(-2px); /* Slight lift effect */
+        }
+        .ai-enhancement {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .ai-enhancement .title {
+            font-size: 28px;
+            font-weight: bold; /* Bold text */
+            color: #000000; /* Black text */
+            text-transform: uppercase;
+        }
+        #loading-spinner {
+            display: none;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #000000; /* Black text */
+        }
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .user-profile {
+                margin-top: 10px;
+            }
+            .platforms select {
+                width: 100%;
+            }
+            .buttons button {
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+
+        /* Make the search bar bigger */
+        #idea-search {
+            width: 100%;
+            max-width: 600px;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc; /* Light gray border */
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Viral Content Idea Generator</h1>
+        <div class="user-profile">
+            <img id="profile-pic" src="https://via.placeholder.com/40" alt="User Profile">
+            <span id="user-name">User</span>
+            <a href="#" class="logout" onclick="logoutUser()">Logout</a>
+        </div>
+    </header>
+    
+    <main>
+        <section class="platforms">
+            <label for="platform-select">Choose a Platform:</label>
+            <select id="platform-select">
+                <option value="youtube">YouTube</option>
+                <option value="tiktok">TikTok</option>
+                <option value="instagram">Instagram</option>
+                <option value="twitter">Twitter</option>
+            </select>
+        </section>
+        
+        <section class="idea-generator">
+            <h2>Enter a Topic or Keyword</h2>
+            <input type="text" id="idea-search" placeholder="Enter a topic...">
+            <div class="top-buttons">
+                <button onclick="generateIdea()">Generate Idea</button>
+                <button onclick="suggestTrendingTopics()">Suggest Trending Topics</button>
+            </div>
+            <div id="loading-spinner">
+                <i class="fas fa-spinner fa-spin"></i> Generating...
+            </div>
+            <div id="idea-output" class="output-box"></div>
+            <button onclick="copyToClipboard()">Copy Idea</button>
+            <button onclick="generateStoryline()">Compose Storyline</button>
+            <div id="storyline-output" class="output-box"></div>
+            <button onclick="generateVideoGuide()">Create Video Guide</button>
+            <div id="video-guide-output" class="output-box"></div>
+        </section>
+        
+        <section class="ai-enhancement">
+            <div class="title">
+                <i class="fas fa-magic"></i>
+                AI-Powered Enhancements
+            </div>
+        </section>
+        
+        <section class="extra-options">
+            <button onclick="optimizeIdea()">Optimize Idea</button>
+            <div id="optimize-output" class="output-box"></div>
+        </section>
+        
+        <section class="save-options">
+            <button onclick="saveIdea()">Save Idea</button>
+            <button onclick="downloadIdea()">Download Idea</button>
+            <button onclick="clearAll()">Clear All</button>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 ViralBin. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        // Function to generate an idea
+        async function generateIdea() {
+            const outputBox = document.getElementById("idea-output");
+            const spinner = document.getElementById("loading-spinner");
+            spinner.style.display = "block";
+            outputBox.innerText = "";
+
+            const topic = document.getElementById("idea-search").value;
+            const platform = document.getElementById("platform-select").value;
+
+            const prompt = `Generate a viral content idea for ${platform} about ${topic}.`;
+
+            try {
+                const response = await fetch("https://api.openai.com/v1/chat/completions", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer YOUR_OPENAI_API_KEY`, // Replace with your API key
+                    },
+                    body: JSON.stringify({
+                        model: "gpt-4", // Use the correct model name
+                        messages: [
+                            { role: "user", content: prompt },
+                        ],
+                    }),
+                });
+
+                const data = await response.json();
+                spinner.style.display = "none";
+                outputBox.innerText = data.choices[0].message.content; // Display the generated idea
+            } catch (error) {
+                spinner.style.display = "none";
+                outputBox.innerText = "Failed to generate idea. Please try again.";
+            }
+        }
+
+        // Function to suggest trending topics
+        async function suggestTrendingTopics() {
+            const outputBox = document.getElementById("idea-output");
+            const spinner = document.getElementById("loading-spinner");
+            spinner.style.display = "block";
+            outputBox.innerText = "";
+
+            const prompt = `Suggest 5 trending topics for viral content in 2023.`;
+
+            try {
+                const response = await fetch("https://api.openai.com/v1/chat/completions", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer YOUR_OPENAI_API_KEY`, // Replace with your API key
+                    },
+                    body: JSON.stringify({
+                        model: "gpt-4", // Use the correct model name
+                        messages: [
+                            { role: "user", content: prompt },
+                        ],
+                    }),
+                });
+
+                const data = await response.json();
+                spinner.style.display = "none";
+                outputBox.innerText = data.choices[0].message.content; // Display the trending topics
+            } catch (error) {
+                spinner.style.display = "none";
+                outputBox.innerText = "Failed to fetch trending topics. Please try again.";
+            }
+        }
+
+        // Function to compose a storyline
+        async function generateStoryline() {
+            const outputBox = document.getElementById("storyline-output");
+            const spinner = document.getElementById("loading-spinner");
+            spinner.style.display = "block";
+            outputBox.innerText = "";
+
+            const idea = document.getElementById("idea-output").innerText;
+
+            const prompt = `Compose a storyline based on this idea: ${idea}`;
+
+            try {
+                const response = await fetch("https://api.openai.com/v1/chat/completions", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer YOUR_OPENAI_API_KEY`, // Replace with your API key
+                    },
+                    body: JSON.stringify({
+                        model: "gpt-4", // Use the correct model name
+                        messages: [
+                            { role: "user", content: prompt },
+                        ],
+                    }),
+                });
+
+                const data = await response.json();
+                spinner.style.display = "none";
+                outputBox.innerText = data.choices[0].message.content; // Display the storyline
+            } catch (error) {
+                spinner.style.display = "none";
+                outputBox.innerText = "Failed to generate storyline. Please try again.";
+            }
+        }
+
+        // Function to create a video guide
+        async function generateVideoGuide() {
+            const outputBox = document.getElementById("video-guide-output");
+            const spinner = document.getElementById("loading-spinner");
+            spinner.style.display = "block";
+            outputBox.innerText = "";
+
+            const idea = document.getElementById("idea-output").innerText;
+
+            const prompt = `Create a step-by-step video guide based on this idea: ${idea}`;
+
+            try {
+                const response = await fetch("https://api.openai.com/v1/chat/completions", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer YOUR_OPENAI_API_KEY`, // Replace with your API key
+                    },
+                    body: JSON.stringify({
+                        model: "gpt-4", // Use the correct model name
+                        messages: [
+                            { role: "user", content: prompt },
+                        ],
+                    }),
+                });
+
+                const data = await response.json();
+                spinner.style.display = "none";
+                outputBox.innerText = data.choices[0].message.content; // Display the video guide
+            } catch (error) {
+                spinner.style.display = "none";
+                outputBox.innerText = "Failed to generate video guide. Please try again.";
+            }
+        }
+
+        // Function to optimize an idea
+        async function optimizeIdea() {
+            const outputBox = document.getElementById("optimize-output");
+            const spinner = document.getElementById("loading-spinner");
+            spinner.style.display = "block";
+            outputBox.innerText = "";
+
+            const idea = document.getElementById("idea-output").innerText;
+
+            const prompt = `Optimize this content idea for better engagement: ${idea}`;
+
+            try {
+                const response = await fetch("https://api.openai.com/v1/chat/completions", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer YOUR_OPENAI_API_KEY`, // Replace with your API key
+                    },
+                    body: JSON.stringify({
+                        model: "gpt-4", // Use the correct model name
+                        messages: [
+                            { role: "user", content: prompt },
+                        ],
+                    }),
+                });
+
+                const data = await response.json();
+                spinner.style.display = "none";
+                outputBox.innerText = data.choices[0].message.content; // Display the optimized idea
+            } catch (error) {
+                spinner.style.display = "none";
+                outputBox.innerText = "Failed to optimize idea. Please try again.";
+            }
+        }
+
+        // Function to save an idea
+        function saveIdea() {
+            const idea = document.getElementById("idea-output").innerText;
+            if (idea) {
+                localStorage.setItem("savedIdea", idea);
+                alert("Idea saved successfully!");
+            } else {
+                alert("No idea to save!");
+            }
+        }
+
+        // Function to download an idea
+        function downloadIdea() {
+            const idea = document.getElementById("idea-output").innerText;
+            if (idea) {
+                const blob = new Blob([idea], { type: "text/plain" });
+                const a = document.createElement("a");
+                a.href = URL.createObjectURL(blob);
+                a.download = "idea.txt";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            } else {
+                alert("No idea to download!");
+            }
+        }
+
+        // Function to copy an idea to clipboard
+        function copyToClipboard() {
+            const idea = document.getElementById("idea-output").innerText;
+            if (idea) {
+                navigator.clipboard.writeText(idea)
+                    .then(() => alert("Idea copied to clipboard!"))
+                    .catch(() => alert("Failed to copy idea."));
+            } else {
+                alert("No idea to copy!");
+            }
+        }
+
+        // Function to clear all outputs
+        function clearAll() {
+            document.getElementById("idea-output").innerText = "";
+            document.getElementById("storyline-output").innerText = "";
+            document.getElementById("video-guide-output").innerText = "";
+            document.getElementById("optimize-output").innerText = "";
+        }
+    </script>
+</body>
+<<<<<<< HEAD
+</html>
+>>>>>>> 609af89 (Updated dashboard with background, animations, AI-powered features)
+=======
+</html>
+>>>>>>> 87a078a (Updated dashboard.html)
