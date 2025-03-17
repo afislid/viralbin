@@ -215,36 +215,43 @@
         <p>&copy; 2025 ViralBin. All rights reserved.</p>
     </footer>
     
-    <script type="module">
-        import { viralIdeas, fallbackIdeas, videoGuides, optimizationTips } from './mockData.js';
-        import { getGoogleTrends, getTwitterTrends, getRedditTrends } from './freeApis.js';
+    <script>
+        const OPENAI_API_KEY = "your_openai_api_key_here"; // Replace with your OpenAI API key
 
         // Function to generate an idea
-        function generateIdea() {
+        async function generateIdea() {
             const outputBox = document.getElementById("idea-output");
             const spinner = document.getElementById("loading-spinner");
             spinner.style.display = "block";
             outputBox.innerText = "";
 
-            const topic = document.getElementById("idea-search").value.toLowerCase();
+            const topic = document.getElementById("idea-search").value;
             const platform = document.getElementById("platform-select").value;
 
-            // Simulate a delay (like an API call)
-            setTimeout(() => {
-                // Find a matching idea
-                const matchingIdea = viralIdeas.find(
-                    item => item.topic === topic && item.platform === platform
-                );
+            const prompt = `Generate a viral content idea for ${platform} about ${topic}.`;
 
-                // Use a fallback idea if no match is found
-                const idea = matchingIdea
-                    ? matchingIdea.idea
-                    : fallbackIdeas[Math.floor(Math.random() * fallbackIdeas.length)];
+            try {
+                const response = await fetch("https://api.openai.com/v1/chat/completions", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${OPENAI_API_KEY}`,
+                    },
+                    body: JSON.stringify({
+                        model: "gpt-4", // Use the correct model name
+                        messages: [
+                            { role: "user", content: prompt },
+                        ],
+                    }),
+                });
 
-                // Display the idea
+                const data = await response.json();
                 spinner.style.display = "none";
-                outputBox.innerText = `For ${platform}: ${idea}`;
-            }, 1000); // 1-second delay
+                outputBox.innerText = data.choices[0].message.content; // Display the generated idea
+            } catch (error) {
+                spinner.style.display = "none";
+                outputBox.innerText = "Failed to generate idea. Please try again.";
+            }
         }
 
         // Function to suggest trending topics
@@ -254,41 +261,135 @@
             spinner.style.display = "block";
             outputBox.innerText = "";
 
-            // Simulate a delay (like an API call)
-            setTimeout(async () => {
-                // Fetch trending topics from multiple APIs
-                const googleTrends = await getGoogleTrends();
-                const twitterTrends = await getTwitterTrends();
-                const redditTrends = await getRedditTrends();
+            const prompt = `Suggest 5 trending topics for viral content in 2023.`;
 
-                // Combine and display trending topics
-                const trendingTopics = [...googleTrends, ...twitterTrends, ...redditTrends];
+            try {
+                const response = await fetch("https://api.openai.com/v1/chat/completions", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${OPENAI_API_KEY}`,
+                    },
+                    body: JSON.stringify({
+                        model: "gpt-4", // Use the correct model name
+                        messages: [
+                            { role: "user", content: prompt },
+                        ],
+                    }),
+                });
+
+                const data = await response.json();
                 spinner.style.display = "none";
-                outputBox.innerText = trendingTopics.join("\n");
-            }, 1000); // 1-second delay
+                outputBox.innerText = data.choices[0].message.content; // Display the trending topics
+            } catch (error) {
+                spinner.style.display = "none";
+                outputBox.innerText = "Failed to fetch trending topics. Please try again.";
+            }
         }
 
         // Function to compose a storyline
-        function generateStoryline() {
+        async function generateStoryline() {
             const outputBox = document.getElementById("storyline-output");
+            const spinner = document.getElementById("loading-spinner");
+            spinner.style.display = "block";
+            outputBox.innerText = "";
+
             const idea = document.getElementById("idea-output").innerText;
-            outputBox.innerText = `Storyline: ${idea}`;
+
+            const prompt = `Compose a storyline based on this idea: ${idea}`;
+
+            try {
+                const response = await fetch("https://api.openai.com/v1/chat/completions", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${OPENAI_API_KEY}`,
+                    },
+                    body: JSON.stringify({
+                        model: "gpt-4", // Use the correct model name
+                        messages: [
+                            { role: "user", content: prompt },
+                        ],
+                    }),
+                });
+
+                const data = await response.json();
+                spinner.style.display = "none";
+                outputBox.innerText = data.choices[0].message.content; // Display the storyline
+            } catch (error) {
+                spinner.style.display = "none";
+                outputBox.innerText = "Failed to generate storyline. Please try again.";
+            }
         }
 
         // Function to create a video guide
-        function generateVideoGuide() {
+        async function generateVideoGuide() {
             const outputBox = document.getElementById("video-guide-output");
-            const platform = document.getElementById("platform-select").value;
-            const guide = videoGuides[platform] || ["No guide available for this platform."];
-            outputBox.innerText = guide.join("\n");
+            const spinner = document.getElementById("loading-spinner");
+            spinner.style.display = "block";
+            outputBox.innerText = "";
+
+            const idea = document.getElementById("idea-output").innerText;
+
+            const prompt = `Create a step-by-step video guide based on this idea: ${idea}`;
+
+            try {
+                const response = await fetch("https://api.openai.com/v1/chat/completions", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${OPENAI_API_KEY}`,
+                    },
+                    body: JSON.stringify({
+                        model: "gpt-4", // Use the correct model name
+                        messages: [
+                            { role: "user", content: prompt },
+                        ],
+                    }),
+                });
+
+                const data = await response.json();
+                spinner.style.display = "none";
+                outputBox.innerText = data.choices[0].message.content; // Display the video guide
+            } catch (error) {
+                spinner.style.display = "none";
+                outputBox.innerText = "Failed to generate video guide. Please try again.";
+            }
         }
 
         // Function to optimize an idea
-        function optimizeIdea() {
+        async function optimizeIdea() {
             const outputBox = document.getElementById("optimize-output");
-            const platform = document.getElementById("platform-select").value;
-            const tips = optimizationTips[platform] || ["No tips available for this platform."];
-            outputBox.innerText = tips.join("\n");
+            const spinner = document.getElementById("loading-spinner");
+            spinner.style.display = "block";
+            outputBox.innerText = "";
+
+            const idea = document.getElementById("idea-output").innerText;
+
+            const prompt = `Optimize this content idea for better engagement: ${idea}`;
+
+            try {
+                const response = await fetch("https://api.openai.com/v1/chat/completions", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${OPENAI_API_KEY}`,
+                    },
+                    body: JSON.stringify({
+                        model: "gpt-4", // Use the correct model name
+                        messages: [
+                            { role: "user", content: prompt },
+                        ],
+                    }),
+                });
+
+                const data = await response.json();
+                spinner.style.display = "none";
+                outputBox.innerText = data.choices[0].message.content; // Display the optimized idea
+            } catch (error) {
+                spinner.style.display = "none";
+                outputBox.innerText = "Failed to optimize idea. Please try again.";
+            }
         }
 
         // Function to save an idea
