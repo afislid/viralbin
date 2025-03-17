@@ -37,11 +37,64 @@
     <style>
         body {
             transition: background-color 0.3s, color 0.3s;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            color: white;
+            background: #ffffff; /* White background */
+            color: #000000; /* Black text */
             text-align: center;
             font-family: 'Poppins', sans-serif;
         }
+
+        /* Navbar Styling */
+        .navbar {
+            background: #ffffff; /* White background */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(90deg, #ff5722, #ff9800);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            padding: 5px 0;
+        }
+        .navbar-brand:hover {
+            background: linear-gradient(90deg, #e64a19, #f57c00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .navbar-nav .nav-link {
+            color: #333333; /* Dark gray text */
+            font-size: 16px;
+            margin-left: 20px;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #ff5722; /* Orange text on hover */
+        }
+        .navbar-nav .btn-primary {
+            background: linear-gradient(90deg, #ff5722, #ff9800);
+            border: none;
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .navbar-nav .btn-primary:hover {
+            background: linear-gradient(90deg, #e64a19, #f57c00);
+        }
+        .navbar-nav .btn-secondary {
+            background: #f0f0f0; /* Light gray background */
+            border: none;
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333333; /* Dark gray text */
+        }
+        .navbar-nav .btn-secondary:hover {
+            background: #e0e0e0; /* Slightly darker gray on hover */
+        }
+
+        /* Rest of the styles remain unchanged */
         .hero-section {
             padding: 80px 20px;
             text-align: center;
@@ -49,13 +102,13 @@
             border-radius: 10px;
         }
         .hero-section h1 {
-            color: #fff;
+            color: #000000; /* Black text */
             font-size: 48px;
             font-weight: bold;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
         }
         .hero-section p {
-            color: #ddd;
+            color: #333333; /* Dark gray text */
             font-size: 20px;
         }
         .cta-button {
@@ -84,20 +137,152 @@
             padding: 20px;
         }
         .feature-box {
-            background: rgba(255, 255, 255, 0.1);
+            background: #f0f0f0; /* Light gray background */
             padding: 20px;
             border-radius: 15px;
             width: 280px;
             text-align: center;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
         }
         .feature-box h3 {
-            color: #fff;
+            color: #000000; /* Black text */
             font-size: 22px;
         }
         .feature-box p {
-            color: #ddd;
+            color: #333333; /* Dark gray text */
+            font-size: 16px;
+        }
+
+        /* Why People Love ViralBin Section */
+        .why-love-section {
+            padding: 60px 20px;
+            background: #ffffff; /* White background */
+            margin-top: 40px;
+        }
+        .why-love-section h2 {
+            color: #000000; /* Black text */
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+        .why-love-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            text-align: left;
+        }
+        .why-love-item {
+            background: #f9f9f9; /* Light gray background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+        .why-love-item h3 {
+            color: #000000; /* Black text */
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .why-love-item p {
+            color: #333333; /* Dark gray text */
+            font-size: 16px;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            padding: 60px 20px;
+            background: #f9f9f9; /* Light gray background */
+            margin-top: 40px;
+        }
+        .pricing-section h2 {
+            color: #000000; /* Black text */
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .pricing-card {
+            background: #ffffff; /* White background */
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            text-align: center;
+        }
+        .pricing-card h3 {
+            color: #000000; /* Black text */
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .pricing-card .price {
+            color: #ff5722; /* Orange text */
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .pricing-card .price span {
+            font-size: 18px;
+            color: #333333; /* Dark gray text */
+        }
+        .pricing-card ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+        .pricing-card ul li {
+            color: #333333; /* Dark gray text */
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .pricing-card .cta-button {
+            background: linear-gradient(90deg, #ff5722, #ff9800);
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        .pricing-card .cta-button:hover {
+            background: linear-gradient(90deg, #e64a19, #f57c00);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 60px 20px;
+            background: #f9f9f9; /* Light gray background */
+            margin-top: 40px;
+        }
+        .faq-section h2 {
+            color: #000000; /* Black text */
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+        .faq-item {
+            background: #ffffff; /* White background */
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            text-align: left;
+        }
+        .faq-item h3 {
+            color: #000000; /* Black text */
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .faq-item p {
+            color: #333333; /* Dark gray text */
             font-size: 16px;
         }
     </style>
@@ -105,9 +290,8 @@
 <body>
    <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand fw-bold" href="index.html">
-            <img src="assets/logo.png" alt="ViralBin Logo" width="40" height="40" style="margin-right: 10px;">
-            🔥 ViralBin - AI Content Ideas
+        <a class="navbar-brand" href="index.html">
+            ViralBin
         </a>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav ms-auto">
@@ -141,6 +325,106 @@
             <p>Skyrocket your social media presence with trending ideas.</p>
         </div>
     </div>
+
+    <!-- Why People Love ViralBin Section -->
+    <section class="why-love-section">
+        <h2>Why Do People Love ViralBin?</h2>
+        <div class="why-love-grid">
+            <div class="why-love-item">
+                <h3>✨ Instant Creativity</h3>
+                <p>ViralBin sparks your creativity by providing fresh, trending ideas in seconds. No more staring at a blank screen!</p>
+            </div>
+            <div class="why-love-item">
+                <h3>💡 Tailored for You</h3>
+                <p>Our AI generates ideas based on your chosen platform and niche, ensuring relevance and engagement.</p>
+            </div>
+            <div class="why-love-item">
+                <h3>📈 Proven Results</h3>
+                <p>Users report significant increases in engagement and followers after implementing ViralBin's ideas.</p>
+            </div>
+            <div class="why-love-item">
+                <h3>🆓 Free to Start</h3>
+                <p>Get started for free and experience the power of AI-driven content creation without any upfront cost.</p>
+            </div>
+            <div class="why-love-item">
+                <h3>🤖 Always Evolving</h3>
+                <p>ViralBin's AI constantly learns from trends, ensuring you always get the most up-to-date ideas.</p>
+            </div>
+            <div class="why-love-item">
+                <h3>🌟 User-Friendly</h3>
+                <p>With a simple and intuitive interface, ViralBin makes content creation accessible to everyone.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section">
+        <h2>Pricing Plans</h2>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Free Plan</h3>
+                <div class="price">$0 <span>/ month</span></div>
+                <ul>
+                    <li>✅ 10 AI-generated ideas per day</li>
+                    <li>✅ Access to basic features</li>
+                    <li>✅ Limited platform support</li>
+                    <li>❌ No premium support</li>
+                </ul>
+                <a href="signup.html" class="cta-button">Get Started</a>
+            </div>
+            <div class="pricing-card">
+                <h3>Pro Plan</h3>
+                <div class="price">$19 <span>/ month</span></div>
+                <ul>
+                    <li>✅ Unlimited AI-generated ideas</li>
+                    <li>✅ Access to all platforms</li>
+                    <li>✅ Advanced analytics</li>
+                    <li>✅ Priority support</li>
+                </ul>
+                <a href="signup.html" class="cta-button">Upgrade Now</a>
+            </div>
+            <div class="pricing-card">
+                <h3>Enterprise Plan</h3>
+                <div class="price">Custom</div>
+                <ul>
+                    <li>✅ Everything in Pro</li>
+                    <li>✅ Dedicated account manager</li>
+                    <li>✅ Custom AI training</li>
+                    <li>✅ Team collaboration tools</li>
+                </ul>
+                <a href="contact.html" class="cta-button">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <h3>1. How does ViralBin generate viral content ideas?</h3>
+            <p>ViralBin uses advanced AI algorithms to analyze trending topics and generate unique, engaging content ideas tailored to your chosen platform (e.g., YouTube, TikTok, Instagram).</p>
+        </div>
+        <div class="faq-item">
+            <h3>2. Can I use ViralBin for free?</h3>
+            <p>Yes! ViralBin offers a free plan that allows you to generate viral content ideas. For additional features, you can upgrade to a premium plan.</p>
+        </div>
+        <div class="faq-item">
+            <h3>3. Which platforms does ViralBin support?</h3>
+            <p>ViralBin supports multiple platforms, including YouTube, TikTok, Instagram, Twitter, and more. You can generate ideas for any platform you choose.</p>
+        </div>
+        <div class="faq-item">
+            <h3>4. How do I optimize my content for better engagement?</h3>
+            <p>ViralBin provides optimization tips for each generated idea, such as using trending hashtags, creating eye-catching thumbnails, and posting at peak engagement times.</p>
+        </div>
+        <div class="faq-item">
+            <h3>5. Can I save or download my ideas?</h3>
+            <p>Yes! You can save your ideas to your account or download them as a text file for future reference.</p>
+        </div>
+        <div class="faq-item">
+            <h3>6. Is my data safe with ViralBin?</h3>
+            <p>Absolutely. We prioritize your privacy and use secure encryption to protect your data. Your ideas and personal information are always safe with us.</p>
+        </div>
+    </section>
 
     <footer>
         <p>&copy; 2025 ViralBin. All rights reserved. | <a href="contact.html">Contact Us</a> | <a href="about.html">About</a></p>
