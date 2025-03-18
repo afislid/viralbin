@@ -54,8 +54,7 @@
                         const user = userCredential.user;
 
                         // Check if email is verified
-                        if (user.emailVerified) {
-                            alert("Logged in successfully!");
+                        if (user.emailVerified) {                     
                             window.location.href = "dashboard.html"; // Redirect after login
                         } else {
                             await sendEmailVerification(user); // Resend verification email
@@ -70,9 +69,8 @@
             // Google Sign-In
             document.getElementById("google-signin").addEventListener("click", () => {
                 signInWithPopup(auth, provider)
-                    .then(result => {
-                        alert("Signed in as: " + result.user.displayName);
-                        window.location.href = "dashboard.html"; // Redirects to new landing page
+                    .then(result => {                        
+                        window.location.href = "dashboard.html"; // Redirect to dashboard automatically
                     })
                     .catch(error => alert(error.message));
             });
