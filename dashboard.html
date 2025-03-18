@@ -16,7 +16,6 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             min-height: 100vh;
         }
         header {
@@ -50,8 +49,14 @@
         }
         .platforms {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
             margin-top: 20px;
+            width: 100%;
+        }
+        .platforms label {
+            font-size: 16px;
+            margin-bottom: 10px;
         }
         .platforms select {
             padding: 10px;
@@ -63,6 +68,8 @@
             color: #000000; /* Black text */
             font-weight: bold; /* Bold text */
             transition: background 0.3s, transform 0.3s;
+            width: 100%;
+            max-width: 300px;
         }
         .platforms select:hover {
             background: #f0f0f0; /* Light gray on hover */
@@ -91,9 +98,10 @@
             justify-content: center;
             margin-top: 20px;
             gap: 10px;
+            width: 100%;
         }
         button {
-            background: #ff6f61; /* Orange background */
+            background: #ff5722; /* Orange background (matching index.html and signup.html) */
             color: white; /* White text */
             border: none;
             padding: 12px 20px;
@@ -103,9 +111,11 @@
             font-size: 16px;
             font-weight: bold; /* Bold text */
             margin: 5px; /* Add spacing between buttons */
+            width: 100%;
+            max-width: 300px;
         }
         button:hover {
-            background: #ff3b2f; /* Darker orange on hover */
+            background: #e64a19; /* Darker orange on hover */
             transform: translateY(-2px); /* Slight lift effect */
         }
         .ai-enhancement {
@@ -113,7 +123,7 @@
             margin: 30px 0;
         }
         .ai-enhancement .title {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: bold; /* Bold text */
             color: #000000; /* Black text */
             text-transform: uppercase;
@@ -123,6 +133,14 @@
             margin-top: 20px;
             font-size: 18px;
             color: #000000; /* Black text */
+        }
+        footer {
+            margin-top: 40px;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            background: #ffffff; /* White background */
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
         }
         @media (max-width: 768px) {
             header {
@@ -134,22 +152,15 @@
             }
             .platforms select {
                 width: 100%;
+                max-width: 100%;
             }
             .buttons button {
                 width: 100%;
-                margin: 5px 0;
+                max-width: 100%;
             }
-        }
-
-        /* Make the search bar bigger */
-        #idea-search {
-            width: 100%;
-            max-width: 600px;
-            padding: 12px;
-            font-size: 16px;
-            border: 1px solid #ccc; /* Light gray border */
-            border-radius: 5px;
-            margin-top: 10px;
+            .ai-enhancement .title {
+                font-size: 20px;
+            }
         }
     </style>
 </head>
@@ -177,7 +188,7 @@
         <section class="idea-generator">
             <h2>Enter a Topic or Keyword</h2>
             <input type="text" id="idea-search" placeholder="Enter a topic...">
-            <div class="top-buttons">
+            <div class="buttons">
                 <button onclick="generateIdea()">Generate Idea</button>
                 <button onclick="suggestTrendingTopics()">Suggest Trending Topics</button>
             </div>
@@ -185,10 +196,14 @@
                 <i class="fas fa-spinner fa-spin"></i> Generating...
             </div>
             <div id="idea-output" class="output-box"></div>
-            <button onclick="copyToClipboard()">Copy Idea</button>
-            <button onclick="generateStoryline()">Compose Storyline</button>
+            <div class="buttons">
+                <button onclick="copyToClipboard()">Copy Idea</button>
+                <button onclick="generateStoryline()">Compose Storyline</button>
+            </div>
             <div id="storyline-output" class="output-box"></div>
-            <button onclick="generateVideoGuide()">Create Video Guide</button>
+            <div class="buttons">
+                <button onclick="generateVideoGuide()">Create Video Guide</button>
+            </div>
             <div id="video-guide-output" class="output-box"></div>
         </section>
         
@@ -200,14 +215,18 @@
         </section>
         
         <section class="extra-options">
-            <button onclick="optimizeIdea()">Optimize Idea</button>
+            <div class="buttons">
+                <button onclick="optimizeIdea()">Optimize Idea</button>
+            </div>
             <div id="optimize-output" class="output-box"></div>
         </section>
         
         <section class="save-options">
-            <button onclick="saveIdea()">Save Idea</button>
-            <button onclick="downloadIdea()">Download Idea</button>
-            <button onclick="clearAll()">Clear All</button>
+            <div class="buttons">
+                <button onclick="saveIdea()">Save Idea</button>
+                <button onclick="downloadIdea()">Download Idea</button>
+                <button onclick="clearAll()">Clear All</button>
+            </div>
         </section>
     </main>
     
@@ -437,6 +456,14 @@
             document.getElementById("storyline-output").innerText = "";
             document.getElementById("video-guide-output").innerText = "";
             document.getElementById("optimize-output").innerText = "";
+        }
+
+       // Function to handle logout
+      function logoutUser() {
+          // Clear user session or token (if applicable)
+          localStorage.removeItem("userToken"); // Example: Remove a stored token
+          window.location.href = "index.html"; // Redirect to the login page automatically
+}
         }
     </script>
 </body>
