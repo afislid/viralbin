@@ -10,7 +10,14 @@
     <script type="module">
         // Import Firebase
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { 
+            getAuth, 
+            signInWithPopup, 
+            GoogleAuthProvider, 
+            createUserWithEmailAndPassword, 
+            signInWithEmailAndPassword, 
+            sendEmailVerification 
+        } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
         // Firebase configuration
         const firebaseConfig = {
@@ -31,24 +38,32 @@
 
         document.addEventListener("DOMContentLoaded", () => {
             // Email/Password Signup/Login
-            document.getElementById("auth-button").addEventListener("click", () => {
+            document.getElementById("auth-button").addEventListener("click", async () => {
                 const email = document.getElementById("email").value;
                 const password = document.getElementById("password").value;
 
-                if (isSignup) {
-                    createUserWithEmailAndPassword(auth, email, password)
-                        .then(userCredential => {
-                            alert("Account created successfully!");
-                            window.location.href = "dashboard.html"; // Redirect after signup
-                        })
-                        .catch(error => alert(error.message));
-                } else {
-                    signInWithEmailAndPassword(auth, email, password)
-                        .then(userCredential => {
+                try {
+                    if (isSignup) {
+                        // Create user with email and password
+                        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                        await sendEmailVerification(userCredential.user); // Send verification email
+                        alert("Account created successfully! Please check your email for verification.");
+                    } else {
+                        // Log in with email and password
+                        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                        const user = userCredential.user;
+
+                        // Check if email is verified
+                        if (user.emailVerified) {
                             alert("Logged in successfully!");
                             window.location.href = "dashboard.html"; // Redirect after login
-                        })
-                        .catch(error => alert(error.message));
+                        } else {
+                            await sendEmailVerification(user); // Resend verification email
+                            alert("Please verify your email before logging in. Check your inbox for the verification link.");
+                        }
+                    }
+                } catch (error) {
+                    alert(error.message);
                 }
             });
 
@@ -75,8 +90,8 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            color: white;
+            background-color: #ffffff; /* Updated to professional white background */
+            color: #333; /* Updated text color for better contrast */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -84,22 +99,25 @@
             margin: 0;
         }
         .container {
-            background: rgba(255, 255, 255, 0.1);
+            background: #ffffff; /* Updated container background to white */
             padding: 40px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
             text-align: center;
             width: 350px;
+            border: 1px solid #e0e0e0; /* Added border for better definition */
         }
         h2 {
             margin-bottom: 20px;
+            color: #333; /* Updated heading color */
         }
         input {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
-            border: none;
+            border: 1px solid #e0e0e0; /* Added border for inputs */
             border-radius: 5px;
+            background-color: #f9f9f9; /* Light background for inputs */
         }
         .btn {
             background: #ff5722;
@@ -116,12 +134,12 @@
         .toggle {
             margin-top: 15px;
             cursor: pointer;
-            color: #ffcc00;
+            color: #ff5722; /* Updated toggle link color */
         }
         .google-btn {
             background: white;
             color: black;
-            border: none;
+            border: 1px solid #e0e0e0; /* Added border for Google button */
             padding: 10px;
             width: 100%;
             cursor: pointer;
